@@ -1,5 +1,5 @@
-struct LHCbModel{N,T,L<:Number}
-    chains::SVector{N,DecayChain{X,V1,V2,T} where {X,V1,V2}}
+struct LHCbModel{N,L<:Number,D<:DecayChain}
+    chains::SVector{N,D}
     couplings::SVector{N,L}
     isobarnames::SVector{N,String}
 end
@@ -17,7 +17,7 @@ function LHCbModel(; chains, couplings, isobarnames)
         getindex.(v, 1), getindex.(v, 2), getindex.(v, 3)
     #
     Ttbs = typeof(chains[1].tbs)
-    sv_sort_chains = (SVector{N,DecayChain{X,V1,V2,Ttbs} where {X,V1,V2}})(sort_chains)
+    sv_sort_chains = SVector{N}(sort_chains)
     sv_sort_couplings = SVector{N}(sort_couplings)
     sv_sort_isobarnames = SVector{N}(sort_isobarnames)
     #
