@@ -1,5 +1,5 @@
 
-breakup(m², m1², m2²) = sqrt(KallenFact(m², m1², m2²)) / (2 * sqrt(m²))
+breakup(m, m1, m2) = sqrtKallenFact(m, m1, m2) / (2 * m)
 
 function F²(l, p, p0, d)
     pR = p * d
@@ -31,8 +31,9 @@ function (BW::BreitWignerMinL)(σ)
     m, Γ₀ = BW.pars
     @unpack l, minL = BW
     @unpack m1, m2, mk, m0 = BW
-    p, p0 = breakup(σ, m1^2, m2^2), breakup(m^2, m1^2, m2^2)
-    q, q0 = breakup(m0^2, σ, mk^2), breakup(m0^2, m^2, mk^2)
+    sqrtσ = sqrt(σ)
+    p, p0 = breakup(sqrtσ, m1, m2), breakup(m, m1, m2)
+    q, q0 = breakup(m0, sqrtσ, mk), breakup(m0, m, mk)
     Γ = Γ₀ * (p / p0)^(2l + 1) * m / sqrt(σ) * F²(l, p, p0, dR)
     1 / (m^2 - σ - 1im * m * Γ) * (p / p0)^l * (q / q0)^minL *
     sqrt(F²(l, p, p0, dR) * F²(minL, q, q0, dΛc))
@@ -59,7 +60,7 @@ function (BW::BuggBreitWignerMinL)(σ)
     σA = mK^2 - mπ^2 / 2
     m, Γ₀, γ = BW.pars
     @unpack m1, m2 = BW
-    Γ = (σ - σA) / (m^2 - σA) * Γ₀ * exp(-γ * σ)# * breakup(σ,m1^2,m2^2)/(2*sqrt(σ))
+    Γ = (σ - σA) / (m^2 - σA) * Γ₀ * exp(-γ * σ)
     1 / (m^2 - σ - 1im * m * Γ)
 end
 
@@ -81,8 +82,9 @@ Flatte1405(pars::T; kw...) where {T} = Flatte1405(; pars, kw...)
 function (BW::Flatte1405)(σ)
     m, Γ₀ = BW.pars
     @unpack m1, m2, m0, mk = BW
-    p, p0 = breakup(σ, m1^2, m2^2), breakup(m^2, mπ^2, mΣ^2)
-    p′, p0′ = breakup(σ, mπ^2, mΣ^2), breakup(m^2, mπ^2, mΣ^2)
+    sqrtσ = sqrt(σ)
+    p, p0 = breakup(sqrtσ, m1, m2), breakup(m, mπ, mΣ)
+    p′, p0′ = breakup(sqrtσ, mπ, mΣ), breakup(m, mπ, mΣ)
     Γ1 = Γ₀ * (p / p0) * m / sqrt(σ)
     Γ2 = Γ₀ * (p′ / p0′) * m / sqrt(σ)
     Γ = Γ1 + Γ2
@@ -100,9 +102,10 @@ end
 
 @recipe function f(BW::Lineshape)
     xv = range((BW.m1 + BW.m2)^2, (BW.m0 - BW.mk)^2, length=300)
+    sqrtσ = sqrt(σ)
     intensity(σ) = abs2(BW(σ)) *
-                   breakup(σ, BW.m1^2, BW.m2^2) *
-                   breakup(BW.m0^2, σ, BW.mk^2) / sqrt(σ)
+                   breakup(sqrtσ, BW.m1, BW.m2) *
+                   breakup(BW.m0, sqrtσ, BW.mk) / sqrtσ
     yv = intensity.(xv)
     (xv, yv ./ sum(yv) .* length(yv))
 end

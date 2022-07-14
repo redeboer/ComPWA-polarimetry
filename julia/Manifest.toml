@@ -870,11 +870,11 @@ version = "0.1.10"
 
 [[deps.ThreeBodyDecay]]
 deps = ["Cuba", "Parameters", "PartialWaveFunctions", "QuadGK", "RecipesBase", "StaticArrays"]
-git-tree-sha1 = "95d22c3558927a4a2e4e5d17678cd5e13e34c99f"
+git-tree-sha1 = "c6a4df60bf78002203773f7477881af136c28565"
 repo-rev = "master"
 repo-url = "https://github.com/mmikhasenko/ThreeBodyDecay.jl"
 uuid = "e6563dab-9ca1-5843-bde3-2ccf38d63843"
-version = "0.5.1"
+version = "0.6.0"
 
 [[deps.Transducers]]
 deps = ["Adapt", "ArgCheck", "BangBang", "Baselet", "CompositionsBase", "DefineSingletons", "Distributed", "InitialValues", "Logging", "Markdown", "MicroCollections", "Requires", "Setfield", "SplittablesBase", "Tables"]
