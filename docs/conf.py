@@ -250,6 +250,7 @@ extensions = [
     "sphinx_codeautolink",
     "sphinx_copybutton",
     "sphinx_design",
+    "sphinx_multiversion",
     "sphinx_togglebutton",
     "sphinxcontrib.bibtex",
     "sphinxcontrib.inkscapeconverter",
@@ -257,6 +258,9 @@ extensions = [
 html_js_files = [
     # https://github.com/requirejs/requirejs/tags
     "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js",
+]
+html_sidebars = [
+    "versioning.html",
 ]
 html_sourcelink_suffix = ""
 html_static_path = ["_static"]
@@ -364,10 +368,19 @@ nitpick_ignore_regex = [
 numfig = True
 primary_domain = "py"
 pygments_style = "sphinx"
+smv_branch_whitelist = r"^.*$"
+smv_outputdir_format = "{ref.name}"
+smv_prefer_remote_refs = False
+smv_released_pattern = r"^tags/.*$"
+smv_remote_whitelist = None  # local branches only
+smv_tag_whitelist = r"^[0-9]+\.[0-9]+(\.[0-9]+)?$"
 suppress_warnings = [
     "mystnb.mime_priority",  # plotly figures in LaTeX build
     # https://github.com/executablebooks/MyST-NB/blob/4dcf7c5/docs/conf.py#L46-L47
     "mystnb.unknown_mime_type",
+]
+templates_path = [
+    "_templates",
 ]
 use_multitoc_numbering = True
 version = get_version()
