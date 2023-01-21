@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sympy as sp
 
-from polarimetry.decay import Particle, ThreeBodyDecayChain
+from polarimetry.decay import IsobarNode, Particle, ThreeBodyDecayChain
 from polarimetry.dynamics import (
     BlattWeisskopf,
     BreitWignerMinL,
@@ -11,7 +11,7 @@ from polarimetry.dynamics import (
     Q,
 )
 
-from .particle import PARTICLE_TO_ID, K, Σ, p, π
+from .particle import PARTICLE_TO_ID, K, Λc, Σ, p, π
 
 
 def formulate_bugg_breit_wigner(
@@ -144,3 +144,49 @@ def _to_mass_symbol(particle: Particle) -> sp.Symbol:
     if state_id is not None:
         return sp.Symbol(f"m{state_id}", nonnegative=True)
     return sp.Symbol(f"m_{{{particle.name}}}", nonnegative=True)
+
+
+def _formulate_damping_factors(
+    decay_chain: ThreeBodyDecayChain,
+) -> tuple[BreitWignerMinL, dict[sp.Symbol, float]]:
+    s = _get_mandelstam_s(decay_chain)
+    child1_mass, child2_mass = map(_to_mass_symbol, decay_chain.decay_products)
+    l_dec = sp.Rational(decay_chain.outgoing_ls.L)
+    l_prod = sp.Rational(decay_chain.incoming_ls.L)
+    parent_mass = sp.Symbol(f"m_{{{decay_chain.parent.name}}}")
+    spectator_mass = sp.Symbol(f"m_{{{decay_chain.spectator.name}}}")
+    resonance_mass = sp.Symbol(f"m_{{{decay_chain.resonance.name}}}")
+    resonance_width = sp.Symbol(Rf"\Gamma_{{{decay_chain.resonance.name}}}")
+    R_dec = sp.Symbol(R"R_\mathrm{res}")
+    R_prod = sp.Symbol(R"R_{\Lambda_c}")
+    parameter_defaults = {
+        parent_mass: decay_chain.parent.mass,
+        spectator_mass: decay_chain.spectator.mass,
+        resonance_mass: decay_chain.resonance.mass,
+        resonance_width: decay_chain.resonance.width,
+        child1_mass: decay_chain.decay_products[0].mass,
+        child2_mass: decay_chain.decay_products[1].mass,
+        # https://github.com/ComPWA/polarimetry/pull/11#issuecomment-1128784376
+        R_dec: 1.5,
+        R_prod: 5,
+    }
+    dynamics = BreitWignerMinL(
+        s,
+        parent_mass,
+        spectator_mass,
+        resonance_mass,
+        resonance_width,
+        child1_mass,
+        child2_mass,
+        l_dec,
+        l_prod,
+        R_dec,
+        R_prod,
+    )
+    return dynamics, parameter_defaults
+
+
+def _get_meson_radius(node: IsobarNode) -> tuple[sp.Symbol, float]:
+    if node.parent is Λc:
+        return sp.Symbol(R"R_{\Lambda_c}"), 5
+    return sp.Symbol(R"R_\mathrm{res}"), 1.5

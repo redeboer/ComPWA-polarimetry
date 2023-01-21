@@ -188,3 +188,10 @@ class BlattWeisskopf(UnevaluatedExpression):
     def _latex(self, printer, *args):
         z, L = map(printer._print, self.args)
         return Rf"F_{{{L}}}\left({z}\right)"
+
+
+def formulate_damping_factor(q, q0, L, R) -> sp.Mul:
+    return sp.Mul(
+        (q / q0) ** L,
+        BlattWeisskopf(q * R, L) / BlattWeisskopf(q0 * R, L),
+    )
