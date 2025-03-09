@@ -67,8 +67,8 @@ dependencies = [
 
 [[package]]
 name = "ampform-dpd"
-version = "0.2.4.dev1+g2694da6"
-source = { git = "https://github.com/ComPWA/ampform-dpd?rev=2694da6#2694da6cc24434a5a3740b2be60a9436727b82e8" }
+version = "0.2.4.dev2+g1343363"
+source = { git = "https://github.com/ComPWA/ampform-dpd?rev=1343363#1343363ab49e7818da8a7d8f0f7a46b0ee659cfa" }
 dependencies = [
     { name = "ampform" },
     { name = "attrs" },
@@ -3246,7 +3246,7 @@ types = [
 [package.metadata]
 requires-dist = [
     { name = "ampform", specifier = ">=0.15.7" },
-    { name = "ampform-dpd", git = "https://github.com/ComPWA/ampform-dpd?rev=2694da6" },
+    { name = "ampform-dpd", git = "https://github.com/ComPWA/ampform-dpd?rev=1343363" },
     { name = "attrs", specifier = ">=20.1.0" },
     { name = "ipython" },
     { name = "matplotlib" },
