@@ -56,8 +56,8 @@ wheels = [
 
 [[package]]
 name = "ampform"
-version = "0.15.8.dev10+g24c10be"
-source = { git = "https://github.com/ComPWA/ampform?rev=24c10bed#24c10beda0da3ce259a630a8a9367978b88c6ebe" }
+version = "0.15.8.dev8+g2fe2cf2"
+source = { git = "https://github.com/ComPWA/ampform?rev=2fe2cf2a#2fe2cf2aa530137afd35edd72c8c74e084bb4ab6" }
 dependencies = [
     { name = "attrs" },
     { name = "frozendict" },
@@ -67,8 +67,8 @@ dependencies = [
 
 [[package]]
 name = "ampform-dpd"
-version = "0.2.4.dev6+gdfeb766"
-source = { git = "https://github.com/ComPWA/ampform-dpd?rev=dfeb766#dfeb766d252bdc61b5af76203ff737d8ee6de2c1" }
+version = "0.2.3"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ampform" },
     { name = "attrs" },
@@ -80,6 +80,10 @@ dependencies = [
     { name = "sympy" },
     { name = "tensorwaves", extra = ["jax"] },
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/71/90/8a753823010c6158adee2bc400432d6908dd6433648ba86ebf0f2bc45028/ampform_dpd-0.2.3.tar.gz", hash = "sha256:2cfcd67b98e342ad051b6e2c2ccc3c97f3c145792cc62c36373e230611c3edc7", size = 325714 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c1/0b/46d89187179235cbcd4d22c36be0eb7b09f91037d96a3c8e3eabf01d962c/ampform_dpd-0.2.3-py3-none-any.whl", hash = "sha256:766f2a344165bdaa7bdee929f7c8a69a708b78f2d39a53241e08f0eb69acb4fd", size = 41776 },
 ]
 
 [[package]]
@@ -3245,8 +3249,8 @@ types = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ampform", git = "https://github.com/ComPWA/ampform?rev=24c10bed" },
-    { name = "ampform-dpd", git = "https://github.com/ComPWA/ampform-dpd?rev=dfeb766" },
+    { name = "ampform", git = "https://github.com/ComPWA/ampform?rev=2fe2cf2a" },
+    { name = "ampform-dpd", specifier = "~=0.2.3" },
     { name = "attrs", specifier = ">=20.1.0" },
     { name = "ipython" },
     { name = "matplotlib" },
