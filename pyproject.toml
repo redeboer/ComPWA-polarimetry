@@ -573,4 +573,4 @@ constraint-dependencies = [
 ]
 
 [tool.uv.sources]
-ampform-dpd = {git = "https://github.com/ComPWA/ampform-dpd", rev = "a6baf03"}
+ampform-dpd = {git = "https://github.com/ComPWA/ampform-dpd", rev = "9f7130f"}
