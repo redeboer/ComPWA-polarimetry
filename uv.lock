@@ -56,8 +56,8 @@ wheels = [
 
 [[package]]
 name = "ampform"
-version = "0.15.8.dev1+g6c46052"
-source = { git = "https://github.com/ComPWA/ampform?rev=6c46052d#6c46052db002d82de1a89bd901be7000a5ebd6c2" }
+version = "0.15.8.dev2+g984ed4b"
+source = { git = "https://github.com/ComPWA/ampform?rev=984ed4bf#984ed4bf79d00975feea36331ef566d5622b4c63" }
 dependencies = [
     { name = "attrs" },
     { name = "frozendict" },
@@ -67,8 +67,8 @@ dependencies = [
 
 [[package]]
 name = "ampform-dpd"
-version = "0.2.4.dev2+g1343363"
-source = { git = "https://github.com/ComPWA/ampform-dpd?rev=1343363#1343363ab49e7818da8a7d8f0f7a46b0ee659cfa" }
+version = "0.2.4.dev3+g1be5340"
+source = { git = "https://github.com/ComPWA/ampform-dpd?rev=1be5340#1be5340cb40be2f26215f65dcb725c1797d5e06a" }
 dependencies = [
     { name = "ampform" },
     { name = "attrs" },
@@ -3246,7 +3246,7 @@ types = [
 [package.metadata]
 requires-dist = [
     { name = "ampform", specifier = ">=0.15.7" },
-    { name = "ampform-dpd", git = "https://github.com/ComPWA/ampform-dpd?rev=1343363" },
+    { name = "ampform-dpd", git = "https://github.com/ComPWA/ampform-dpd?rev=1be5340" },
     { name = "attrs", specifier = ">=20.1.0" },
     { name = "ipython" },
     { name = "matplotlib" },
